@@ -24,4 +24,9 @@ export class LibraryController {
     getLibraryContent () {
         return this.library.books;
     }
+
+    deleteBook (title) {
+       this.library.deleteBook(title);
+    }
+
 }

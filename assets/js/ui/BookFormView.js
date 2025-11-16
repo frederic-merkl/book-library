@@ -28,33 +28,18 @@ export class BookFormView {
             if (!backToLibraryButton) {throw new Error ("backToLibraryButton not found")} 
 
             backToLibraryButton.addEventListener("click", async () => {
-                try {
                     await this.viewCallback();
-                } catch (error) { // Ich denke das muss weiter geworfen werden je nachdem wo du den fehler behandeln willst. Wobei der View zum behandl gut sein könnte.
-                    console.error(error)
-                }
-            })
+                })
         
             // handles for submit event on submit, not button click
             bookForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             // Extract form-data and make js object
             const form = event.target; // Das Formular-Element
-            const formData = new FormData(form); // FormData-Objekt erstellen
-            const bookData = Object.fromEntries(formData.entries()); // macht ein JS Objekt aus formDatas
+            this.handleFormData(form);
+            await this.viewCallback();
 
-            
-            try {
-                const newBook = await this.libraryController.addBookFormData(bookData); // I dont need the const yet. Its better for testing und future functionality
-                await this.viewCallback();                              
-            }         
-            catch (error) {
-                console.error(error.stack);
-                const errorMessageElement = document.querySelector(".errorMessage");
-                if (errorMessageElement) errorMessageElement.textContent = `${error.message}`;
-                console.error(error.message);              
-            }})
-        } catch (error) {
+        })} catch (error) {
                 console.error(error.stack);
                 console.error("init book form view error:", error);
                 const errorMessageElement = document.querySelector(".errorMessage");
@@ -63,6 +48,28 @@ export class BookFormView {
                 else {
                     console.error(error.message);
                 }    
+        }
+    }
+
+
+  async handleFormData (form) {
+        
+        const formData = new FormData(form); // FormData-Objekt erstellen
+        const bookData = Object.fromEntries(formData.entries()); // macht ein JS Objekt aus formData
+        // !form.pages because I believe its a value that would be used for a delete. only for a addBook.
+        if (!form.pages) {
+            this.libraryController.deleteBook(form.title);
+            
+        } else {
+            try {
+                const newBook = await this.libraryController.addBookFormData(bookData); // I dont need the const yet. Its better for testing und future functionality
+                await this.viewCallback();                              
+            } catch (error) {
+                console.error(error.stack);
+                const errorMessageElement = document.querySelector(".errorMessage");
+                if (errorMessageElement) errorMessageElement.textContent = `${error.message}`;
+                console.error(error.message);              
+            }
         }
     }
 }

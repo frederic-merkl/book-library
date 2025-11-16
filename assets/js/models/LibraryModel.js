@@ -14,11 +14,17 @@ export class Library {
     }
 
     deleteBook (title = undefined) {
+                console.log(title.textContent.toLowerCase());
+
         if (!title) {throw new Error ("Enter a valid title")}
-        this.#books = this.#books.filter(book => book.title.toLowerCase() != title.toLowerCase())
+        this.books = this.books.filter(book => book.title.toLowerCase() != title.value.toLowerCase())
     }
 
     get books () {
         return this.#books;
+    }
+
+    set books (books) {
+        this.#books = books;
     }
 }
