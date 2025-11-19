@@ -56,7 +56,7 @@ export class BookFormView {
         
         const formData = new FormData(form); // FormData-Objekt erstellen
         const bookData = Object.fromEntries(formData.entries()); // macht ein JS Objekt aus formData
-        // !form.pages because I believe its a value that would be used for a delete. only for a addBook.
+        // !form.pages because I believe its a value that wouldt be used for a delete. only to add a book.
         if (!form.pages) {
             this.libraryController.deleteBook(form.title);
             

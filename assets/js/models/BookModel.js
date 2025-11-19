@@ -1,5 +1,4 @@
 export class Book {
-    static idCounter = 0; // Statische Eigenschaft für IDs
     #id;
     #title;
     #cover;

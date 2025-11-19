@@ -36,7 +36,6 @@ export class LibraryView {
   
   async initLibraryView () {
         const path = "./assets/templates/libraryView.html";
-      
         
      try {   
         const response = await fetch(path);
