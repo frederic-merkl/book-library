@@ -6,7 +6,10 @@ export class BookFormView {
         this.libraryController = libraryController;
         this.viewCallback = viewCallback;           
     }
-
+// TODO: Refactor the architecture. 
+// init und formhandle logik hängen zu stark zusammen
+// Versuche das O von SOLID zu implementieren und ueber die gesamte app das S zu strukturieren
+// realisierend wie wichtig das O ist wird meine functiion immer komplizierter.
     async initBookFormView (bookFormTemplate) {
         // Set the path to the template dynamically
         const path = `./assets/templates/${bookFormTemplate}.html`;
@@ -27,6 +30,17 @@ export class BookFormView {
             const backToLibraryButton = document.querySelector(".backToLibraryButton");
             if (!backToLibraryButton) {throw new Error ("backToLibraryButton not found")} 
 
+            const getbookDataButton = document.querySelector(".getbookDataButton");
+            if (!getbookDataButton) { throw new Error ("getbookDataButton not found")};
+
+            getbookDataButton.addEventListener("click", async () => {
+                const form = document.querySelector(".addBookForm")
+                const formData = new FormData(form);
+                const bookData = Object.fromEntries(formData.entries());
+                const fetchedBookData = await this.libraryController.getBookData(bookData);
+                // TODO add bockdata to form.
+            })
+     
             backToLibraryButton.addEventListener("click", async () => {
                     await this.viewCallback();
                 })
@@ -36,7 +50,7 @@ export class BookFormView {
             event.preventDefault();
             // Extract form-data and make js object
             const form = event.target; // Das Formular-Element
-            this.handleFormData(form);
+            await this.handleFormData(form);
             await this.viewCallback();
 
         })} catch (error) {
@@ -63,7 +77,6 @@ export class BookFormView {
         } else {
             try {
                 const newBook = await this.libraryController.addBookFormData(bookData); // I dont need the const yet. Its better for testing und future functionality
-                await this.viewCallback();                              
             } catch (error) {
                 console.error(error.stack);
                 const errorMessageElement = document.querySelector(".errorMessage");

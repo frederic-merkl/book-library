@@ -2,9 +2,11 @@ import { Library } from "./models/LibraryModel.js";
 import { LibraryView } from "./ui/LibraryView.js";
 import { BookFormView } from "./ui/BookFormView.js";
 import { LibraryController } from "./controller/LibraryController.js";
+import { OpenLibraryService } from "./services/OpenLibraryService.js"; 
 
 const library = new Library();
-const libraryController = new LibraryController(library)
+const openlibraryService = new OpenLibraryService()
+const libraryController = new LibraryController(library, openlibraryService)
 const libraryView = new LibraryView(libraryController);
 const bookFormView = new BookFormView(libraryController, showLibraryView);
  

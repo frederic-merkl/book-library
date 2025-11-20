@@ -2,6 +2,7 @@
         <header>
             <h2>New Book</h2>
             <button type="button" class="backToLibraryButton">Library</button>
+            <button type="button" class="getbookDataButton">Get Book Data</button>
         </header>
         <form class="addBookForm">
             <label for="title">Title:</label>
@@ -17,7 +18,7 @@
             <input type="text" id="category" name="category" placeholder="Enter category">
 
             <label for="pages">Pages:</label>
-            <input type="number" id="pages" name="pages" placeholder="Enter number of pages" min="1">
+            <input type="string" id="pages" name="pages" placeholder="Enter number of pages"> <!-- Input im Model validieren weil hier um Problem zu vermeiden string verwendet wird. valdierung nicht möglichj. -->
 
             <label for="publisher">Publisher:</label>
             <input type="text" id="publisher" name="publisher" placeholder="Enter publisher name">

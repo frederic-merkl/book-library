@@ -2,8 +2,9 @@ import { Book } from "../models/BookModel.js";
 
 export class LibraryController {
      
-    constructor (library) {
+    constructor (library, service) {
         this.library = library;
+        this.service = service;
 
     }
 
@@ -19,6 +20,11 @@ export class LibraryController {
             console.error("handleBookSubmit error:", error);
             throw error;
             }
+    }
+
+    // returns openlibrary book data
+    getBookData (bookdata) {
+        return this.service.fetchBookData(bookdata);
     }
 
     getLibraryContent () {
