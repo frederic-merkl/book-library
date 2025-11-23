@@ -26,7 +26,7 @@ export class LibraryController {
 
     // returns openlibrary book data
     getBookData (bookData) {
-        if (!bookData || typeof bookData !== "object") {throw new Error ("NO BOOK DATA PRESENT");}
+        if (!bookData || typeof bookData !== "object") {throw new Error ("No book data present");}
         return this.service.fetchBookData(bookdata);
     }
 
@@ -35,7 +35,7 @@ export class LibraryController {
     }
 
     deleteBook (title) {
-        if (!title.trim() || typeof title !== "string") {throw new Error ("ENTER A VALID TITLE");}
+        if (!title.trim() || typeof title !== "string") {throw new Error ("Enter a valid title");}
 
        this.library.deleteBook(title);
     }

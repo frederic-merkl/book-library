@@ -40,7 +40,7 @@ export class BookFormView {
                 const fetchedBookData = await this.libraryController.getBookData(bookData);
                 // TODO add bockdata to form.
             })
-     
+            // view change with injected callback.
             backToLibraryButton.addEventListener("click", async () => {
                     await this.viewCallback();
                 })
@@ -72,8 +72,7 @@ export class BookFormView {
         const bookData = Object.fromEntries(formData.entries()); // macht ein JS Objekt aus formData
         // !form.pages because I believe its a value that wouldt be used for a delete. only to add a book.
         if (!form.pages) {
-            this.libraryController.deleteBook(form.title);
-            
+            this.libraryController.deleteBook(form.title);   
         } else {
             try {
                 const newBook = await this.libraryController.addBookFormData(bookData); // I dont need the const yet. Its better for testing und future functionality
