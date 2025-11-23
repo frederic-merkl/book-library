@@ -6,7 +6,7 @@ export class OpenLibraryService {
              return data[1].trim() !== "";
         })
         
-        const baseURL = "http://localhost:3000/api/books"; // wie dynamisch setzen?
+        const baseURL = "http://localhost:3000/api/books"; // TODO set dynamically
         const URLparam = new URLSearchParams(filteredData);
         const queryString = String(URLparam);
 
