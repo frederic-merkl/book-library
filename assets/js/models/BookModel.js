@@ -29,7 +29,9 @@ export class Book {
         if (typeof publisher !== "string") {throw new Error ("NOT A VALID PUBLISHER");}
         if (publisher.trim().length > 50) {throw new Error ("PUBLISHER TO LONG");}    
         
-        if (typeof doneReading !== "boolean") {throw new Error ("DONE-READING MUST BE A BOOLEAN VALUE")}
+        if (doneReading === undefined) {doneReading = false;}
+        console.log(doneReading)
+        if (typeof doneReading !== "boolean") {throw new Error ("DONE-READING MUST BE A BOOLEAN VALUE");}
        
         this.#id = crypto.randomUUID();
         this.#title = title.trim();
