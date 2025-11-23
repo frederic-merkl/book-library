@@ -1,0 +1,54 @@
+This project is a practical exercise to strengthen my understanding of OOP and clean software architecture.  
+My main focus was implementing a maintainable, layered MVC-style architecture using vanilla JS, HTML and CSS.  
+In the beginning I mixed UI-, controller- and model-logic, because what I learned in class was closer to an MVP pattern.  
+Over time I refactored the code into a clean MVC structure to clearly separate concerns.
+
+Technically, this project applies multiple core software engineering principles:
+– OOP with encapsulated models and private fields  
+– constructor-based dependency injection  
+– a layered MVC-style architecture  
+– asynchronous JavaScript with multi-layer async flow  
+– template-based rendering without frameworks  
+– REST API integration through a custom Express proxy  
+– separation of concerns between View, Controller, Model and Service  
+– structured error handling and validation  
+
+
+┌───────────────────────────────┐
+│           Frontend             │
+└───────────────────────────────┘
+
+          User Input
+               │
+               ▼
+        ┌──────────────┐
+        │     View      │
+        │ (UI Renderer) │
+        └──────────────┘
+               │ events
+               ▼
+        ┌──────────────┐
+        │  Controller   │
+        │  (App Logic)  │
+        └──────────────┘
+          │         │
+   update │         │ fetch data
+          ▼         ▼
+   ┌──────────────┐  ┌──────────────┐
+   │    Model      │  │   Service    │
+   │ (Data Layer)  │  │ (API Client) │
+   └──────────────┘  └──────────────┘
+                           │ HTTP
+                           ▼
+                ┌────────────────────┐
+                │    Backend API     │
+                │   (Express Proxy)  │
+                └────────────────────┘
+                           │ fetch
+                           ▼
+                ┌────────────────────┐
+                │  OpenLibrary API    │
+                └────────────────────┘
+
+
+At this time, the implementation of the data handling for the OpenLibrary API response is still missing and will be added later.
