@@ -35,9 +35,9 @@ export class AddBookFormView {
 
             getbookDataButton.addEventListener("click", async () => {
                 const formData = new FormData(bookForm); // makes form-data object out of the form.
-                const bookData = Object.fromEntries(formData.entries()); // makes JS objekt out of from-data object.
+                const bookData = Object.fromEntries(formData.entries()); // makes JS object out of from-data object.
                 const fetchedBookData = await this.libraryController.getBookData(bookData);
-                // TODO add bookdata to form.
+                await this.populateForm(fetchedBookData);
             })
             // view change with injected callback.
             backToLibraryButton.addEventListener("click", async () => {
@@ -50,7 +50,7 @@ export class AddBookFormView {
             // Extract form-data and make js object
             const form = event.target; // Das Formular-Element
             await this.handleFormData(form);
-            await this.viewCallback();
+            await this.viewCallback(); //TODO view wechel nur bei erfolg.
 
         })} catch (error) {
                 console.error(error.stack);
@@ -63,6 +63,16 @@ export class AddBookFormView {
                 }    
         }
     }
+
+    async populateForm (fetchedBookData) {
+        console.log(fetchedBookData)
+        try {
+        const bookForm = document.querySelector(".addBookForm");
+        bookForm.author.value = fetchedBookData.docs[0].author_name[0];
+        console.log(bookForm.author.value)
+        } catch (error) {
+            console.log(error)} 
+        }
 
 
   async handleFormData (form) {

@@ -8,9 +8,19 @@ const PORT = 3000;
 app.use(cors({
   origin: 'http://127.0.0.1:5500' // wie dynamisch setzen?
 }));
+app.use(express.json());
 
-app.get("/api/books", async (request, result) => {
-    const URLparam = new URLSearchParams(request.query);
+
+app.post("/api/books", async (request, result) => {
+    const dataObj = request.body;
+    // In order to avoid emtpy query parameters I have to filter the object.
+    // Makes array [[key, value]] => data[1] == value
+    const filteredData = Object.entries(dataObj).filter((data) => {
+    if (data[0] === "category") {return false} // category will not be included in search parameters
+    return data[1].trim() !== "";
+    })
+
+    const URLparam = new URLSearchParams(filteredData);
     const queryString = String(URLparam);
     const limit = 1;
     const url = `https://openlibrary.org/search.json?${queryString}&limit=${limit}`;
@@ -23,6 +33,13 @@ app.get("/api/books", async (request, result) => {
         reponse.status(500).json({ error: "Sever error" });
     }
 });
+
+// app.get("/api/book-cover", async (request, result) =>{
+// //https://covers.openlibrary.org/b/$key/$value-$size.jpg
+// // pattern to access covers
+     
+// })
+
 
 // Server starten
 app.listen(PORT, () =>

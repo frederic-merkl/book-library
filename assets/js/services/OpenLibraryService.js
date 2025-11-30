@@ -1,19 +1,28 @@
 export class OpenLibraryService {
 
-  async fetchBookData (dataObj) {
-        // In order to avoid emtpy query parameters I have to filter the object.
-        const filteredData = Object.entries(dataObj).filter((data) => {
-             return data[1].trim() !== "";
-        })
-        
-        const baseURL = "http://localhost:3000/api/books"; // TODO set dynamically
-        const URLparam = new URLSearchParams(filteredData);
-        const queryString = String(URLparam);
+  async fetchWorks(dataObj) {
 
-        const response = await fetch (`${baseURL}?${queryString}`);
-        console.log(await response.json())      
-        if (!response.ok) {throw new Error ("fetch error")}
 
-        //return response.json();
-    }
-}
+    const baseURL = "http://localhost:3000/api/books";
+    // const URLparam = new URLSearchParams(filteredData);
+    // const queryString = String(URLparam);
+    // `${baseURL}?${queryString}`
+    try {
+    const response = await fetch(baseURL, {
+      method: "POST", // um das objekt durchzureichen und den query string nicht 2 mal zu bauen.
+      headers: { "Content-Type": "application/json" }, // header setzten damit der server weiß was er verarbeiten muss
+      body: JSON.stringify(dataObj) //Macht JSON string aus JS objekt weil nur Text ueber HTTP gesendet werden kann.
+    });
+    // console.log(await response.text());
+    if (!response.ok) { throw new Error("fetch error") }
+    return response.json();
+  } catch (error) {
+    console.error (error)
+  }
+
+  //  async fetchCover (openLibraryCoverID) {
+  //   const baseURL = "http://localhost:3000/api/cover"; 
+
+  //   const queryString = String(URLparam);
+  //  } 
+  }}

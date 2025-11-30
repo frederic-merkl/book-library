@@ -27,7 +27,12 @@ export class LibraryController {
     // returns openlibrary book data
     getBookData (bookData) {
         if (!bookData || typeof bookData !== "object") {throw new Error ("No book data present");}
-        return this.service.fetchBookData(bookData);
+        return this.service.fetchWorks(bookData);
+    }
+
+    getBookCover (openLibraryID) {
+        if (!openLibraryID || typeof openLibraryID !== "string") {throw new Error ("No open library cover ID found");}
+        return this.service.fetchCover(openLibraryID);    
     }
 
     getLibraryContent () {
