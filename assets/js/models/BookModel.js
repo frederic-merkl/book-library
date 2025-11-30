@@ -12,13 +12,13 @@ export class Book {
     constructor (title, cover,  author, category, pages, publisher, doneReading) {
         console.log("Book constructor called with:", { title, cover, author, category, pages, publisher, doneReading });
         
-        if (typeof title !== "string" || !title.trim()) {throw new Error ("ENTER VALID TITLE")}
+        if (typeof title !== "string" || !title.trim()) {throw new Error ("ENTER A VALID TITLE")}
         if (title.trim().length > 200) {throw new Error ("TITLE TO LONG");}
 
-        if (typeof author !== "string") {throw new Error ("ENTER VALID AUTHOR");}
+        if (typeof author !== "string") {throw new Error ("ENTER A VALID AUTHOR");}
         if (author.trim().length > 50) {throw new Error ("AUTHOR NAME IS TO LONG");}
 
-        if (typeof category !== "string" || !this.validateCategory(category)) {throw new Error ("CHOSE VALID CATEGORY");}
+        if (typeof category !== "string" || !this.validateCategory(category)) {throw new Error ("CHOSE A VALID CATEGORY");}
         if (category === "Chose a Category") {category = "Not Set";}
         
         if (typeof pages !== "string") {throw new Error ("ENTER VALID PAGE NUMBER");}
@@ -30,8 +30,8 @@ export class Book {
         if (publisher.trim().length > 50) {throw new Error ("PUBLISHER TO LONG");}    
         
         if (doneReading === undefined) {doneReading = false;}
-        console.log(doneReading)
-        if (typeof doneReading !== "boolean") {throw new Error ("DONE-READING MUST BE A BOOLEAN VALUE");}
+        console.log(doneReading) // checkbox return donereading = "true". 
+        if (typeof doneReading !== "boolean" && doneReading !== "true") {throw new Error ("DONE-READING MUST BE A BOOLEAN VALUE");}
        
         this.#id = crypto.randomUUID();
         this.#title = title.trim();

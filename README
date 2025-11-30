@@ -1,7 +1,7 @@
 This project is a practical exercise to strengthen my understanding of OOP and clean software architecture.  
 My main focus was implementing a maintainable, layered MVC-style architecture using vanilla JS, HTML and CSS.  
 In the beginning I mixed UI-, controller- and model-logic, because what I learned in class was closer to an MVP pattern.  
-Over time I refactored the code into a clean MVC structure to clearly separate concerns.
+Over time I refactored the code into a clean MVC structure to clearly separate concerns. 
 
 Concepts I apply in this project:
 – OOP with encapsulated models and private fields  

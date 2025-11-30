@@ -1,6 +1,6 @@
 import { insertTemplateToDOM } from "./util/ui-util.js";
 
-export class BookFormView {
+export class AddBookFormView {
     // dependency injection for the controller and a callback which navigates back to libraryView.
     constructor (libraryController, viewCallback) {
         this.libraryController = libraryController;
@@ -9,10 +9,10 @@ export class BookFormView {
 // TODO: Refactor the architecture. 
 // init und formhandle logik hängen zu stark zusammen
 // Versuche das O von SOLID zu implementieren und ueber die gesamte app das S zu strukturieren
-// realisierend wie wichtig das O ist wird meine functiion immer komplizierter.
-    async initBookFormView (bookFormTemplate) {
-        // Set the path to the template dynamically
-        const path = `./assets/templates/${bookFormTemplate}.html`;
+// realisierend wie wichtig das O ist, wird meine funktion immer komplizierter.
+    async init () {
+
+        const path = `./assets/templates/addBookForm.html`;
         
         try {
             // Fetch template and inser to DOM
@@ -24,8 +24,8 @@ export class BookFormView {
             const templateHTML = await response.text();
             insertTemplateToDOM(templateHTML);
 
-            const bookForm = document.querySelector(`.${bookFormTemplate}`);
-            if (!bookForm) {throw new Error ("Book form template not found")}
+            const bookForm = document.querySelector(".addBookForm");
+            if (!bookForm) {throw new Error ("Add book form template not found")}
 
             const backToLibraryButton = document.querySelector(".backToLibraryButton");
             if (!backToLibraryButton) {throw new Error ("backToLibraryButton not found")} 
@@ -34,11 +34,10 @@ export class BookFormView {
             if (!getbookDataButton) { throw new Error ("getbookDataButton not found")};
 
             getbookDataButton.addEventListener("click", async () => {
-                const form = document.querySelector(".addBookForm")
-                const formData = new FormData(form);
-                const bookData = Object.fromEntries(formData.entries());
+                const formData = new FormData(bookForm); // makes form-data object out of the form.
+                const bookData = Object.fromEntries(formData.entries()); // makes JS objekt out of from-data object.
                 const fetchedBookData = await this.libraryController.getBookData(bookData);
-                // TODO add bockdata to form.
+                // TODO add bookdata to form.
             })
             // view change with injected callback.
             backToLibraryButton.addEventListener("click", async () => {
@@ -70,10 +69,7 @@ export class BookFormView {
         
         const formData = new FormData(form); // FormData-Objekt erstellen
         const bookData = Object.fromEntries(formData.entries()); // macht ein JS Objekt aus formData
-        // !form.pages because I believe its a value that wouldt be used for a delete. only to add a book.
-        if (!form.pages) {
-            this.libraryController.deleteBook(form.title);   
-        } else {
+
             try {
                 const newBook = await this.libraryController.addBookFormData(bookData); // I dont need the const yet. Its better for testing und future functionality
             } catch (error) {
@@ -84,4 +80,3 @@ export class BookFormView {
             }
         }
     }
-}

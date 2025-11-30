@@ -1,15 +1,8 @@
-/*
-	Basic responsive styles for the Book Library app.
-	- No hard-coded widths for the main content (use max-width and responsive grid)
-	- Lightweight, readable structure with comments that show nesting intent
-	- Works well on mobile-first and scales up for larger screens
-*/
-
 :root {
 	--bg: #ffffff;
-	--surface: #1d1db7;
+	--surface: #d1c399;
 	--muted: #6b7280;
-	--accent: #2563eb; /* blue-600 */
+	--accent: #2563eb; 
 	--danger: #dc2626;
 	--radius: 8px;
 	--gap: 0.75rem;
@@ -67,7 +60,7 @@ header nav {
 	cursor: pointer;
 	font-weight: 600;
 }
-.button--add { background: linear-gradient(180deg,#ffffff,#f8fafc); }
+.button--add { color: linear-gradient(180deg,#ffffff,#f8fafc); }
 .button--delete { color: var(--danger); border-color: rgba(220,38,38,0.12); }
 
 .errorMessage {
@@ -83,7 +76,7 @@ header nav {
 	padding: 0 var(--page-padding);
 }
 
-/* Library view and book list (mobile-first) */
+
 .libraryView {
 	width: 100%;
 }
@@ -94,7 +87,7 @@ header nav {
 	align-items: start;
 }
 
-/* Book card (nested intent: .book -> .cover, .meta) */
+
 .book {
 	background: var(--surface);
     background-color: #2563eb;

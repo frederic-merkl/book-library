@@ -27,7 +27,7 @@ export class LibraryController {
     // returns openlibrary book data
     getBookData (bookData) {
         if (!bookData || typeof bookData !== "object") {throw new Error ("No book data present");}
-        return this.service.fetchBookData(bookdata);
+        return this.service.fetchBookData(bookData);
     }
 
     getLibraryContent () {

@@ -14,8 +14,8 @@ export class Library {
     }
 
     deleteBook (title = undefined) {
-        if (!title) {throw new Error ("Enter a valid title")}
-        this.books = this.books.filter(book => book.title.toLowerCase() != title.value.toLowerCase())
+        if (!title.trim()) {throw new Error ("Enter a valid title")}
+        this.books = this.books.filter(book => book.title.toLowerCase() != title.toLowerCase().trim())
     }
 
     get books () {
