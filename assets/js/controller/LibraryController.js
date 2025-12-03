@@ -7,9 +7,8 @@ export class LibraryController {
         if (!service || typeof service !== "object") { throw new Error("No service present"); }
         this.library = library;
         this.service = service;
-
     }
-
+    
     addBookFormData(bookData) {
 
         try {

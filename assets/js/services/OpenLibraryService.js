@@ -1,12 +1,8 @@
 export class OpenLibraryService {
 
   async fetchWorks(dataObj) {
-
-
     const baseURL = "http://localhost:3000/api/books";
-    // const URLparam = new URLSearchParams(filteredData);
-    // const queryString = String(URLparam);
-    // `${baseURL}?${queryString}`
+
     try {
       const response = await fetch(baseURL, {
         method: "POST", // um das objekt durchzureichen und den query string nicht 2 mal zu bauen.
@@ -19,11 +15,13 @@ export class OpenLibraryService {
     } catch (error) {
       console.error(error)
     }
+  }
 
-    //  async fetchCover (openLibraryCoverID) {
-    //   const baseURL = "http://localhost:3000/api/cover"; 
-
-    //   const queryString = String(URLparam);
-    //  } 
+  async fetchCover(openLibraryCoverID) {
+    const baseURL = "http://localhost:3000/api/cover";
+    const queryString = new URLSearchParams(openLibraryCoverID).toString(); // funktioniert nicht mit einzelnen wertden braucht immer key:value
+    const requestURL = `${baseURL}?${queryString}`;
+    const response = fetch(requestURL);
+    return (await response).arrayBuffer(); 
   }
 }
