@@ -1,7 +1,5 @@
 This project is a practical exercise to strengthen my understanding of OOP and clean software architecture.  
-My main focus was implementing a maintainable, layered MVC-style architecture using vanilla JS, HTML and CSS.  
-In the beginning I mixed UI-, controller- and model-logic, because what I learned in class was closer to an MVP pattern.  
-Over time I refactored the code into a clean MVC structure to clearly separate concerns. 
+My main focus was implementing a maintainable, layered MVC-style architecture using vanilla JS, HTML and CSS.   
 
 Concepts I apply in this project:
 – OOP with encapsulated models and private fields  
@@ -9,7 +7,7 @@ Concepts I apply in this project:
 – a layered MVC-style architecture  
 – asynchronous JavaScript with multi-layer async flow  
 – template-based rendering  
-– REST API with Express as a proxy for the open book library API  
+– API with Express as a proxy for the open book library API  
 – separation of concerns between View, Controller, Model and Service  
 – error handling and validation
 - event handling
@@ -28,7 +26,7 @@ Concepts I apply in this project:
         └──────────────┘
                │ events
                ▼
-        ┌──────────────┐
+        ┌─────────────——
         │  Controller   │
         │  (App Logic)  │
         └──────────────┘
